@@ -1,8 +1,10 @@
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Lazy, Autoplay, Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 
 export function SliderMain({arrayDesk, arrayMobile}) {
+
     let listItems;
 
     if(arrayDesk.length == arrayMobile.length){
@@ -17,17 +19,19 @@ export function SliderMain({arrayDesk, arrayMobile}) {
         });
     }
 
+    
+
     return (
 
         <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            modules={[Lazy, Autoplay, Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={0}
             slidesPerView={1}
-            navigation
+            navigation={true}
+            autoplay={true}
+            lazy={true}
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
             >
             {listItems}
         </Swiper>
