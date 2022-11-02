@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.banner-mobile{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .banner-mobile{
+        display: block;
+    }
+
+    .banner-desk{
+        display: none;
+    }
+}

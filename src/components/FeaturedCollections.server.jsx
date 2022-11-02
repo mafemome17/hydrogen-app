@@ -16,6 +16,7 @@ export default function FeaturedCollections() {
           return (
             <Link key={collection.id} to={`/collections/${collection.handle}`}>
               <div className="grid gap-4">
+                
                 {collection?.image && (
                   <Image
                     className="rounded shadow-border overflow-clip inline-block aspect-[5/4] md:aspect-[3/2] object-cover"

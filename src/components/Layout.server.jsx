@@ -12,6 +12,7 @@ import {
    */
   export function Layout({ children }) {
     const { pathname } = useUrl();
+    let listItems;
     const isHome = pathname === "/";
     const {
       data: { shop },
@@ -20,6 +21,21 @@ import {
       cache: CacheLong(),
       preload: true,
     });
+    const arrayBannerDesk = shop.bannersDeskMain.value.split(",");
+    const arrayBannerMobile = shop.bannersMobileMain.value.split(",");
+    if(arrayBannerDesk.length == arrayBannerMobile.length){
+      listItems = arrayBannerDesk.map((banner, i) =>  {
+        return (
+          <li className="swiper-slide swiper-slide-active">
+            <img className="banner-desk" src={banner} />
+            <img className="banner-mobile" src={arrayBannerMobile[i]}/>
+          </li>
+        );
+    
+      });
+    }
+
+    
     return (
       <>
         <Suspense>
@@ -27,7 +43,7 @@ import {
             type="defaultSeo"
             data={{
               title: shop.name,
-              description: shop.description,
+              description: shop.description
             }}
           />
         </Suspense>
@@ -50,6 +66,14 @@ import {
             </div>
           </header>
           <main role="main" id="mainContent" className="flex-grow">
+            <div className="swiper">
+              <ul className="swiper-wrapper">
+                {listItems}
+              </ul>
+              <div className="swiper-pagination"></div>
+              <div className="swiper-button-prev"></div>
+              <div className="swiper-button-next"></div>
+            </div>
             <Suspense>{children}</Suspense>
           </main>
         </div>
@@ -61,6 +85,13 @@ import {
       shop {
         name
         description
+        id
+        bannersDeskMain: metafield (namespace: "banners-desk", key: "banner-main"){
+          value
+        }
+        bannersMobileMain: metafield (namespace: "banners-mobile", key: "banner-main-mobile"){
+          value
+        }
       }
     }
   `;
