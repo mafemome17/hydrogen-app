@@ -7,6 +7,7 @@ import {
     Seo,
   } from "@shopify/hydrogen";
   import { Suspense } from "react";
+  import { SliderMain } from "./slider/SliderMain.client";
   /**
    * A server component that defines a structure and organization of a page that can be used in different parts of the Hydrogen app
    */
@@ -23,18 +24,6 @@ import {
     });
     const arrayBannerDesk = shop.bannersDeskMain.value.split(",");
     const arrayBannerMobile = shop.bannersMobileMain.value.split(",");
-    if(arrayBannerDesk.length == arrayBannerMobile.length){
-      listItems = arrayBannerDesk.map((banner, i) =>  {
-        return (
-          <li className="swiper-slide swiper-slide-active">
-            <img className="banner-desk" src={banner} />
-            <img className="banner-mobile" src={arrayBannerMobile[i]}/>
-          </li>
-        );
-    
-      });
-    }
-
     
     return (
       <>
@@ -66,14 +55,10 @@ import {
             </div>
           </header>
           <main role="main" id="mainContent" className="flex-grow">
-            <div className="swiper">
-              <ul className="swiper-wrapper">
+              <ul>
                 {listItems}
               </ul>
-              <div className="swiper-pagination"></div>
-              <div className="swiper-button-prev"></div>
-              <div className="swiper-button-next"></div>
-            </div>
+            <SliderMain arrayDesk={arrayBannerDesk} arrayMobile={arrayBannerMobile} />
             <Suspense>{children}</Suspense>
           </main>
         </div>
